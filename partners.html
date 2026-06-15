@@ -3,34 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Партнёрская программа — Пробуждение | Кристиан Девалкьер</title>
+<title>Партнёрская программа — Пробуждение</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bk:#040810;--dp:#080F1E;--nv:#0D1A30;--gd:#C9A84C;--wh:#F5F0E8;--mt:#7A8FA8;--br:#1E2E44;--gn:#2ecc71}
+:root{--bk:#040810;--dp:#080F1E;--nv:#0D1A30;--gd:#C9A84C;--gl:#F0D284;--wh:#F5F0E8;--mt:#7A8FA8;--br:#1E2E44;--gn:#2ecc71;--silver:#A8A9AD;--bronze:#CD7F32}
 body{font-family:Georgia,serif;background:var(--bk);color:var(--wh);min-height:100vh;line-height:1.6}
+a{color:var(--gd);text-decoration:none}
 nav{background:var(--bk);padding:1rem 2rem;border-bottom:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
 .logo{font-size:.9rem;letter-spacing:.3em;color:var(--gd);text-transform:uppercase}
-nav a{font-size:.75rem;color:var(--mt);text-decoration:none;letter-spacing:.1em}
+nav a{font-size:.75rem;color:var(--mt);letter-spacing:.1em}
 nav a:hover{color:var(--gd)}
-.hero{display:grid;grid-template-columns:1fr 1.1fr;min-height:520px;gap:0;align-items:center;background:radial-gradient(ellipse 80% 80% at 30% 50%,#0e2244,transparent)}
+.hero{display:grid;grid-template-columns:1fr 1.1fr;min-height:560px;gap:0;align-items:center;background:radial-gradient(ellipse 80% 80% at 30% 50%,#0e2244,transparent)}
 .hero-img{display:flex;align-items:flex-end;justify-content:center;padding:2rem 1rem 0}
-.hero-img img{width:100%;max-width:380px;display:block;filter:drop-shadow(0 0 50px #C9A84C55) drop-shadow(0 0 100px #4a7fff33);animation:float 6s ease-in-out infinite}
+.hero-img img{width:100%;max-width:400px;display:block;filter:drop-shadow(0 0 50px #C9A84C55) drop-shadow(0 0 100px #4a7fff33);animation:float 6s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .hero-text{padding:2rem 2rem 2rem 1rem}
 .tag{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gd);margin-bottom:.6rem}
 h1{font-size:2rem;font-weight:900;line-height:1.1;margin-bottom:.6rem}
 h1 em{font-style:normal;color:var(--gd)}
-.hero-sub{font-size:.88rem;color:var(--mt);margin-bottom:1.5rem;line-height:1.7}
-.met{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);margin-bottom:0}
-.mc{background:var(--dp);padding:1.2rem;text-align:center}
-.mn{font-size:1.5rem;font-weight:900;color:var(--gd);display:block;margin-bottom:.2rem}
-.ml{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt)}
+.sub{font-size:.88rem;color:var(--mt);margin-bottom:1.5rem;line-height:1.7}
+.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--br);margin-bottom:0}
+.level{padding:1.2rem;text-align:center}
+.level.bronze{background:#1a0f00}
+.level.silver{background:#0f0f14}
+.level.gold{background:#1a1400}
+.level-icon{font-size:1.5rem;display:block;margin-bottom:.3rem}
+.level-name{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.2rem}
+.level.bronze .level-name{color:var(--bronze)}
+.level.silver .level-name{color:var(--silver)}
+.level.gold .level-name{color:var(--gd)}
+.level-clients{font-size:.72rem;color:var(--mt);margin-bottom:.3rem}
+.level-rate{font-size:1.4rem;font-weight:900}
+.level.bronze .level-rate{color:var(--bronze)}
+.level.silver .level-rate{color:var(--silver)}
+.level.gold .level-rate{color:var(--gd)}
+.level-earn{font-size:.7rem;color:var(--mt)}
+.sep{height:1px;background:linear-gradient(to right,transparent,var(--gd),transparent);opacity:.4}
 .wrap{max-width:720px;margin:0 auto;padding:2rem 1.5rem 4rem}
-.sep{height:1px;background:linear-gradient(to right,transparent,var(--gd),transparent);opacity:.4;margin:2rem 0}
 .card{background:var(--dp);border:1px solid var(--br);padding:1.8rem;margin-bottom:1.2rem}
 .fg{margin-bottom:1rem}
 .fg label{display:block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);margin-bottom:.4rem}
-.fg input,.fg select{width:100%;padding:.8rem 1rem;background:var(--nv);border:1px solid var(--br);color:var(--wh);font-size:.88rem;font-family:Georgia,serif;outline:none;transition:border-color .2s}
+.fg input,.fg select,.fg textarea{width:100%;padding:.8rem 1rem;background:var(--nv);border:1px solid var(--br);color:var(--wh);font-size:.88rem;font-family:Georgia,serif;outline:none;transition:border-color .2s}
 .fg input:focus,.fg select:focus{border-color:var(--gd)}
 .fg input::placeholder{color:var(--mt)}
 .fg select option{background:var(--nv)}
@@ -55,20 +68,16 @@ table{width:100%;border-collapse:collapse;font-size:.8rem}
 th{background:var(--nv);color:var(--gd);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.7rem .8rem;text-align:left;border-bottom:1px solid var(--br)}
 td{padding:.7rem .8rem;border-bottom:1px solid var(--br);color:#9BADC0;vertical-align:middle}
 tr:hover td{background:var(--nv)}
-.badge{display:inline-block;padding:.15rem .5rem;font-size:.6rem;text-transform:uppercase;background:#1a3d1a;color:var(--gn);border:1px solid var(--gn)}
-@media(max-width:700px){
-  .hero{grid-template-columns:1fr}
-  .hero-img{order:1;padding-top:5rem}.hero-img img{max-width:280px}
-  .hero-text{order:2;padding:1.5rem}
-  h1{font-size:1.6rem}.met{grid-template-columns:1fr}
-  .sgrid{grid-template-columns:1fr}.crow{flex-direction:column;align-items:flex-start}
-}
+.badge-bronze{display:inline-block;padding:.15rem .5rem;font-size:.6rem;text-transform:uppercase;background:#1a0f00;color:var(--bronze);border:1px solid var(--bronze)}
+.badge-silver{display:inline-block;padding:.15rem .5rem;font-size:.6rem;text-transform:uppercase;background:#0f0f14;color:var(--silver);border:1px solid var(--silver)}
+.badge-gold{display:inline-block;padding:.15rem .5rem;font-size:.6rem;text-transform:uppercase;background:#1a1400;color:var(--gd);border:1px solid var(--gd)}
+@media(max-width:700px){.hero{grid-template-columns:1fr;min-height:auto}.hero-img{order:-1;padding:5rem 1.5rem 0}.hero-img img{max-width:260px}.hero-text{padding:1.5rem}.levels{grid-template-columns:1fr}.sgrid{grid-template-columns:1fr}.crow{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
 <nav>
   <span class="logo">Пробуждение</span>
-  <a href="https://kristian250535-source.github.io/kurs-probuzhdenie/index.html">← На сайт</a>
+  <div style="display:flex;gap:1rem"><a href="my-clients.html" style="font-size:.75rem;color:var(--gd);letter-spacing:.1em;border:1px solid var(--gd);padding:.3rem .8rem">Мой кабинет →</a><a href="index.html" style="font-size:.75rem;color:var(--mt);letter-spacing:.1em">← На сайт</a></div>
 </nav>
 
 <div class="hero">
@@ -78,11 +87,29 @@ tr:hover td{background:var(--nv)}
   <div class="hero-text">
     <p class="tag">Партнёрская программа</p>
     <h1>Зарабатывай вместе с<br><em>Кристианом Девалкьером</em></h1>
-    <p class="hero-sub">Рекомендуй курс «ПРОБУЖДЕНИЕ» своей аудитории и получай 20% комиссии с каждой продажи — мгновенно и без ограничений.</p>
-    <div class="met">
-      <div class="mc"><span class="mn">20%</span><span class="ml">Комиссия</span></div>
-      <div class="mc"><span class="mn">14 000 ₽</span><span class="ml">За клиента</span></div>
-      <div class="mc"><span class="mn">∞</span><span class="ml">Без лимита</span></div>
+    <p class="sub">Приводи клиентов и получай комиссию — чем больше клиентов, тем выше твой процент!</p>
+    <div class="levels">
+      <div class="level bronze">
+        <span class="level-icon">🥉</span>
+        <p class="level-name">Бронза</p>
+        <p class="level-clients">1 — 10 клиентов</p>
+        <p class="level-rate">20%</p>
+        <p class="level-earn">14 000 ₽ / клиент</p>
+      </div>
+      <div class="level silver">
+        <span class="level-icon">🥈</span>
+        <p class="level-name">Серебро</p>
+        <p class="level-clients">11 — 20 клиентов</p>
+        <p class="level-rate">30%</p>
+        <p class="level-earn">21 000 ₽ / клиент</p>
+      </div>
+      <div class="level gold">
+        <span class="level-icon">🥇</span>
+        <p class="level-name">Золото</p>
+        <p class="level-clients">21+ клиентов</p>
+        <p class="level-rate">40%</p>
+        <p class="level-earn">28 000 ₽ / клиент</p>
+      </div>
     </div>
   </div>
 </div>
@@ -124,6 +151,7 @@ tr:hover td{background:var(--nv)}
   <div class="result" id="r-card">
     <p style="font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gn);margin-bottom:.8rem">✅ Вы успешно зарегистрированы!</p>
     <p id="r-welcome" style="font-size:1rem;font-weight:700;margin-bottom:1.2rem;color:var(--wh)"></p>
+
     <div class="crow">
       <div><p class="clbl">Ваш промокод</p><p class="cval" id="r-code"></p></div>
       <button class="cbtn" onclick="cp('r-code',this)">Копировать</button>
@@ -132,71 +160,133 @@ tr:hover td{background:var(--nv)}
       <div><p class="clbl">Ваша реферальная ссылка</p><p class="cval" id="r-link" style="font-size:.82rem"></p></div>
       <button class="cbtn" onclick="cp('r-link',this)">Копировать</button>
     </div>
+
     <div class="ibox">
-      <p>💰 Комиссия: <strong>20% = 14 000 ₽</strong> за каждого клиента</p>
-      <p>💳 Выплата: <strong>сразу после получения оплаты</strong></p>
+      <p>🥉 <strong>Бронза (1-10 клиентов):</strong> 20% = 14 000 ₽ за клиента</p>
+      <p>🥈 <strong>Серебро (11-20 клиентов):</strong> 30% = 21 000 ₽ за клиента</p>
+      <p>🥇 <strong>Золото (21+ клиентов):</strong> 40% = 28 000 ₽ за клиента</p>
+      <p style="margin-top:.5rem">💳 Выплата: <strong>сразу после получения оплаты</strong></p>
       <p>📞 Вопросы: <strong>@DEVALCOEUR | +7 966 057 77 79</strong></p>
     </div>
+
     <p class="tag" style="margin-bottom:.5rem">Готовый пост для вашего канала</p>
     <div class="pbox" id="r-post"></div>
     <button class="btn" style="margin-top:.5rem" onclick="cpPost()">Копировать пост →</button>
   </div>
 
-  <div class="sep"></div>
+  <div class="sep" style="margin:2rem 0"></div>
 
   <p class="tag">Статистика программы</p>
   <h2 style="font-family:Georgia,serif;font-size:1.5rem;font-weight:600;margin-bottom:1rem">Партнёры программы</h2>
   <div class="sgrid">
-    <div class="sc"><div class="mn" id="s-t" style="font-size:1.5rem;font-weight:900;color:var(--gd)">0</div><div class="ml">Партнёров</div></div>
-    <div class="sc"><div class="mn" id="s-s" style="font-size:1.5rem;font-weight:900;color:var(--gd)">0</div><div class="ml">Продаж</div></div>
-    <div class="sc"><div class="mn" id="s-p" style="font-size:1.5rem;font-weight:900;color:var(--gd)">0 ₽</div><div class="ml">Выплачено</div></div>
+    <div class="sc"><div style="font-size:1.5rem;font-weight:900;color:var(--gd)" id="s-t">0</div><div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt)">Партнёров</div></div>
+    <div class="sc"><div style="font-size:1.5rem;font-weight:900;color:var(--gd)" id="s-s">0</div><div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt)">Продаж</div></div>
+    <div class="sc"><div style="font-size:1.5rem;font-weight:900;color:var(--gd)" id="s-p">0 ₽</div><div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt)">Выплачено</div></div>
   </div>
   <div class="tw">
     <table>
-      <thead><tr><th>#</th><th>Партнёр</th><th>Платформа</th><th>Промокод</th><th>Продажи</th><th>Статус</th></tr></thead>
-      <tbody id="tbl"><tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--mt)">Пока нет зарегистрированных партнёров</td></tr></tbody>
+      <thead><tr><th>#</th><th>Партнёр</th><th>Платформа</th><th>Промокод</th><th>Уровень</th><th>Клиентов</th><th>% комиссии</th><th>Статус</th></tr></thead>
+      <tbody id="tbl"><tr><td colspan="8" style="text-align:center;padding:1.5rem;color:var(--mt)">Пока нет зарегистрированных партнёров</td></tr></tbody>
     </table>
   </div>
 </div>
 
 <script>
-var pts=[];
+var SCRIPT_URL = 'ВАШ_URL_APPS_SCRIPT';
+var pts = [];
+
+function getRate(sales) {
+  if (sales <= 10) return {rate: 20, level: 'Бронза', next: 10 - sales + ' до Серебра'};
+  if (sales <= 20) return {rate: 30, level: 'Серебро', next: 20 - sales + ' до Золота'};
+  return {rate: 40, level: 'Золото', next: 'Максимальный уровень!'};
+}
+
+function getLevelBadge(sales) {
+  if (sales <= 10) return '<span class="badge-bronze">🥉 Бронза</span>';
+  if (sales <= 20) return '<span class="badge-silver">🥈 Серебро</span>';
+  return '<span class="badge-gold">🥇 Золото</span>';
+}
+
 function mk(n,i){return n.trim().split(/\s+/).map(function(w){return w[0].toUpperCase();}).join('')+i;}
-function doReg(){
-  var n=document.getElementById('f-name').value.trim(),tg=document.getElementById('f-tg').value.trim(),
-      pl=document.getElementById('f-platform').value,au=document.getElementById('f-audience').value,
-      ni=document.getElementById('f-niche').value,er=document.getElementById('f-err');
+
+function doReg() {
+  var n=document.getElementById('f-name').value.trim(),
+      tg=document.getElementById('f-tg').value.trim(),
+      pl=document.getElementById('f-platform').value,
+      au=document.getElementById('f-audience').value,
+      ni=document.getElementById('f-niche').value,
+      er=document.getElementById('f-err');
   if(!n||!tg||!pl||!au||!ni){er.textContent='Пожалуйста, заполните все обязательные поля!';er.style.display='block';return;}
   er.style.display='none';
-  var id=pts.length+1,code=mk(n,id),link='https://kristian250535-source.github.io/kurs-probuzhdenie/?ref='+code;
+  var id=pts.length+1,code=mk(n,id);
+  var link='https://kristian250535-source.github.io/kurs-probuzhdenie/contact.html?ref='+code;
   pts.push({id:id,name:n,tg:tg,platform:pl,code:code,sales:0});
-  var post='🌟 Друзья, хочу поделиться важным!\n\nЯ познакомился/ась с Кристианом Девалкьером — биоэнергетиком с 20-летним опытом.\n\nОн проводит авторский курс «ПРОБУЖДЕНИЕ» — управление энергией и биополем.\n\nЗа 2 дня + 1 месяц поддержки вы научитесь:\n⚡ Управлять своей энергией\n⚡ Развить интуицию\n⚡ Снять энергетические блоки\n\nПо моему промокоду '+code+' : 70 000 ₽\n\nПодробнее : '+link+'\nЗапись : @DEVALCOEUR';
+
+  // Send to Google Sheets
+  fetch(SCRIPT_URL, {
+    method:'POST',
+    body:JSON.stringify({type:'partner',name:n,telegram:tg,platform:pl,audience:au,niche:ni,code:code,link:link})
+  }).catch(function(){});
+
+  var info = getRate(0);
+  var post='🌟 Друзья, хочу поделиться важным!\n\n'
+    +'Я познакомился/ась с Кристианом Девалкьером — биоэнергетиком с 20-летним опытом.\n\n'
+    +'Он проводит авторский курс «ПРОБУЖДЕНИЕ» — управление энергией и биополем.\n\n'
+    +'За 2 дня + 1 месяц поддержки вы научитесь:\n'
+    +'⚡ Управлять своей энергией\n⚡ Развить интуицию\n⚡ Снять энергетические блоки\n\n'
+    +'Записаться через мою ссылку : '+link+'\n'
+    +'(промокод '+code+' активируется автоматически)\n\n'
+    +'Запись : @DEVALCOEUR';
+
   document.getElementById('r-welcome').textContent=n+' — добро пожаловать в команду!';
   document.getElementById('r-code').textContent=code;
   document.getElementById('r-link').textContent=link;
   document.getElementById('r-post').textContent=post;
   document.getElementById('form-card').style.display='none';
-  var rc=document.getElementById('r-card');rc.classList.add('show');rc.scrollIntoView({behavior:'smooth'});rTbl();
+  var rc=document.getElementById('r-card');rc.classList.add('show');
+  rc.scrollIntoView({behavior:'smooth'});
+  rTbl();
 }
+
 function cp(id,btn){
   var t=document.getElementById(id).textContent;
   function ok(){btn.textContent='✓ Скопировано';btn.classList.add('ok');setTimeout(function(){btn.textContent='Копировать';btn.classList.remove('ok');},2000);}
   if(navigator.clipboard){navigator.clipboard.writeText(t).then(ok);}
   else{var ta=document.createElement('textarea');ta.value=t;ta.style.opacity='0';ta.style.position='fixed';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);ok();}
 }
+
 function cpPost(){
   var t=document.getElementById('r-post').textContent;
   if(navigator.clipboard){navigator.clipboard.writeText(t).then(function(){alert('✅ Пост скопирован!');});}
   else{var ta=document.createElement('textarea');ta.value=t;ta.style.opacity='0';ta.style.position='fixed';document.body.appendChild(ta);ta.select();document.execCommand('copy');document.body.removeChild(ta);alert('✅ Пост скопирован!');}
 }
+
 function rTbl(){
   document.getElementById('s-t').textContent=pts.length;
   var s=pts.reduce(function(a,p){return a+p.sales;},0);
   document.getElementById('s-s').textContent=s;
-  document.getElementById('s-p').textContent=(s*14000).toLocaleString('ru-RU')+' ₽';
-  if(!pts.length){document.getElementById('tbl').innerHTML='<tr><td colspan="6" style="text-align:center;padding:1.5rem;color:var(--mt)">Пока нет зарегистрированных партнёров</td></tr>';return;}
-  document.getElementById('tbl').innerHTML=pts.map(function(p){
-    return '<tr><td>'+p.id+'</td><td><strong style="color:var(--wh)">'+p.name+'</strong><br><span style="font-size:.72rem">'+p.tg+'</span></td><td>'+p.platform+'</td><td style="color:var(--gd);font-weight:700;letter-spacing:.08em">'+p.code+'</td><td>'+p.sales+'</td><td><span class="badge">Активен</span></td></tr>';
+  var totalComm=pts.reduce(function(a,p){
+    var comm=0;
+    for(var i=1;i<=p.sales;i++){comm+=70000*(i<=10?0.2:i<=20?0.3:0.4);}
+    return a+comm;
+  },0);
+  document.getElementById('s-p').textContent=totalComm.toLocaleString('ru-RU')+' ₽';
+  if(!pts.length){
+    document.getElementById('tbl').innerHTML='<tr><td colspan="8" style="text-align:center;padding:1.5rem;color:var(--mt)">Пока нет зарегистрированных партнёров</td></tr>';
+    return;
+  }
+  document.getElementById('tbl').innerHTML=pts.map(function(p,i){
+    var info=getRate(p.sales);
+    return '<tr>'
+      +'<td style="color:var(--mt)">'+(i+1)+'</td>'
+      +'<td><strong style="color:var(--wh)">'+p.name+'</strong><br><span style="font-size:.72rem">'+p.tg+'</span></td>'
+      +'<td style="color:var(--mt)">'+p.platform+'</td>'
+      +'<td style="color:var(--gd);font-weight:700;letter-spacing:.08em">'+p.code+'</td>'
+      +'<td>'+getLevelBadge(p.sales)+'</td>'
+      +'<td style="color:var(--wh);font-weight:700">'+p.sales+'</td>'
+      +'<td style="color:var(--gd);font-weight:700">'+info.rate+'%</td>'
+      +'<td style="font-size:.72rem;color:var(--mt)">'+info.next+'</td>'
+      +'</tr>';
   }).join('');
 }
 </script>
