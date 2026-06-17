@@ -62,6 +62,7 @@ h1 em{font-style:normal;color:var(--gd)}
 
       <div class="fg"><label>Ваше имя *</label><input type="text" id="c-name" placeholder="Иван Иванов"></div>
       <div class="fg"><label>Телефон *</label><input type="tel" id="c-phone" placeholder="+7 999 123 45 67"></div>
+      <div class="fg"><label>Промокод партнёра (если есть)</label><input type="text" id="c-promo" placeholder="Например: ИИ1" oninput="this.value=this.value.toUpperCase()"></div>
       <div class="fg"><label>Telegram</label><input type="text" id="c-telegram" placeholder="@username"></div>
       <div class="fg"><label>Email</label><input type="email" id="c-email" placeholder="ivan@mail.ru"></div>
       <div class="fg"><label>Как узнали о курсе?</label>
@@ -95,7 +96,7 @@ h1 em{font-style:normal;color:var(--gd)}
 
 <script>
 // Google Apps Script URL — замени после деплоя
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwCXXq-Q949sRBkHKK4mmp2Iy2ler8C54HpCBnJ9tZScC1JSqA5kcFhOSVR-4Pr0Y/exec';
+var SCRIPT_URL = 'ВАШ_URL_APPS_SCRIPT';
 
 // Получить промокод из URL
 var urlParams = new URLSearchParams(window.location.search);
@@ -104,11 +105,13 @@ var refCode = urlParams.get('ref') || '';
 if (refCode) {
   document.getElementById('promo-box').style.display = 'block';
   document.getElementById('promo-display').textContent = refCode;
+  document.getElementById('c-promo').value = refCode;
 }
 
 function submitForm() {
   var name = document.getElementById('c-name').value.trim();
   var phone = document.getElementById('c-phone').value.trim();
+  var promoCode = document.getElementById('c-promo').value.trim().toUpperCase();
   var telegram = document.getElementById('c-telegram').value.trim();
   var email = document.getElementById('c-email').value.trim();
   var source = document.getElementById('c-source').value;
@@ -133,8 +136,8 @@ function submitForm() {
     email: email,
     source: source,
     message: message,
-    promoCode: refCode,
-    partnerName: refCode ? 'Партнёр ' + refCode : 'Прямой клиент'
+    promoCode: promoCode,
+    partnerName: promoCode ? 'Партнёр ' + promoCode : 'Прямой клиент'
   };
 
   fetch(SCRIPT_URL, {
