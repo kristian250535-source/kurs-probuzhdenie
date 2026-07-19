@@ -153,8 +153,15 @@ tr:hover td{background:var(--nv)}
     <p id="r-welcome" style="font-size:1rem;font-weight:700;margin-bottom:1.2rem;color:var(--wh)"></p>
 
     <div class="crow">
-      <div><p class="clbl">Ваш промокод</p><p class="cval" id="r-code"></p></div>
+      <div><p class="clbl">Ваш промокод (для клиентов)</p><p class="cval" id="r-code"></p></div>
       <button class="cbtn" onclick="cp('r-code',this)">Копировать</button>
+    </div>
+    <div class="crow" style="border-color:var(--gd)">
+      <div><p class="clbl" style="color:var(--gd)">🔑 Ваш ключ доступа (для входа в кабинет)</p><p class="cval" id="r-key"></p></div>
+      <button class="cbtn" onclick="cp('r-key',this)">Копировать</button>
+    </div>
+    <div style="background:#2a1a00;border-left:3px solid var(--gd);padding:.7rem 1rem;margin-bottom:.7rem;font-size:.8rem;color:var(--gl)">
+      ⚠️ <strong>Сохраните ваш ключ доступа!</strong> Он нужен для входа в личный кабинет, где вы видите своих клиентов. Никому его не передавайте.
     </div>
     <div class="crow">
       <div><p class="clbl">Ваша реферальная ссылка</p><p class="cval" id="r-link" style="font-size:.82rem"></p></div>
@@ -207,7 +214,26 @@ function getLevelBadge(sales) {
   return '<span class="badge-gold">🥇 Золото</span>';
 }
 
-function mk(n,i){return n.trim().split(/\s+/).map(function(w){return w[0].toUpperCase();}).join('')+i;}
+// Caractères latins sans ambiguïté (pas de 0/O/1/I/L)
+var CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+// Génère une chaîne aléatoire de N caractères
+function randCode(len){
+  var s='';
+  for(var i=0;i<len;i++){ s+=CHARS.charAt(Math.floor(Math.random()*CHARS.length)); }
+  return s;
+}
+
+// Promocode : 2 lettres + 3 chiffres (ex. PT4K9 style, mais tout latin, unique)
+function genPromo(){
+  var s='';
+  for(var i=0;i<2;i++){ s+='ABCDEFGHJKMNPQRSTUVWXYZ'.charAt(Math.floor(Math.random()*23)); }
+  for(var j=0;j<3;j++){ s+='23456789'.charAt(Math.floor(Math.random()*8)); }
+  return s;
+}
+
+// Clé d'accès : 8 caractères latins + chiffres, sans ambiguïté (ex. K7X9P2M4)
+function genKey(){ return randCode(8); }
 
 function doReg() {
   var n=document.getElementById('f-name').value.trim(),
@@ -218,14 +244,16 @@ function doReg() {
       er=document.getElementById('f-err');
   if(!n||!tg||!pl||!au||!ni){er.textContent='Пожалуйста, заполните все обязательные поля!';er.style.display='block';return;}
   er.style.display='none';
-  var id=pts.length+1,code=mk(n,id);
+  var id=pts.length+1;
+  var code=genPromo();          // promocode latin unique
+  var accessKey=genKey();       // clé d'accès de 8 caractères
   var link='https://kristian250535-source.github.io/kurs-probuzhdenie/contact.html?ref='+code;
   pts.push({id:id,name:n,tg:tg,platform:pl,code:code,sales:0});
 
   // Send to Google Sheets (sauvegarde — on garde tout comme avant)
   fetch(SCRIPT_URL, {
     method:'POST',
-    body:JSON.stringify({type:'partner',name:n,telegram:tg,platform:pl,audience:au,niche:ni,code:code,link:link})
+    body:JSON.stringify({type:'partner',name:n,telegram:tg,platform:pl,audience:au,niche:ni,code:code,accessKey:accessKey,link:link})
   }).catch(function(){});
 
   // Écrire AUSSI dans Firestore (pour que le dashboard affiche les partenaires)
@@ -240,6 +268,7 @@ function doReg() {
         audience:  {stringValue: au},
         niche:     {stringValue: ni},
         code:      {stringValue: code},
+        accessKey: {stringValue: accessKey},
         link:      {stringValue: link},
         date:      {stringValue: new Date().toLocaleDateString('ru-RU')},
         active:    {booleanValue: true}
@@ -259,6 +288,7 @@ function doReg() {
 
   document.getElementById('r-welcome').textContent=n+' — добро пожаловать в команду!';
   document.getElementById('r-code').textContent=code;
+  document.getElementById('r-key').textContent=accessKey;
   document.getElementById('r-link').textContent=link;
   document.getElementById('r-post').textContent=post;
   document.getElementById('form-card').style.display='none';
