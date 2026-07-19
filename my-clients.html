@@ -6,384 +6,321 @@
 <title>Мои клиенты — Пробуждение</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bk:#040810;--dp:#080F1E;--nv:#0D1A30;--gd:#C9A84C;--gl:#F0D284;--wh:#F5F0E8;--mt:#7A8FA8;--br:#1E2E44;--gn:#2ecc71;--rd:#e74c3c;--yw:#f39c12;--bl:#3498db;--silver:#A8A9AD;--bronze:#CD7F32}
+:root{--bk:#040810;--dp:#080F1E;--nv:#0D1A30;--gd:#C9A84C;--gl:#F0D284;--wh:#F5F0E8;--mt:#7A8FA8;--br:#1E2E44;--gn:#2ecc71;--rd:#e74c3c;--yw:#f39c12;--bl:#3498db;--bronze:#CD7F32;--silver:#A8A9AD}
 body{font-family:Georgia,serif;background:var(--bk);color:var(--wh);min-height:100vh;line-height:1.6}
+a{color:var(--gd);text-decoration:none}
 nav{background:var(--dp);padding:1rem 2rem;border-bottom:1px solid var(--br);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:99}
 .logo{font-size:.9rem;letter-spacing:.3em;color:var(--gd);text-transform:uppercase}
-nav a{font-size:.75rem;color:var(--mt);text-decoration:none;letter-spacing:.1em}
-nav a:hover{color:var(--gd)}
-.wrap{max-width:900px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.nav-links{display:flex;gap:1.5rem;align-items:center}
+.nav-links a{font-size:.75rem;color:var(--mt);letter-spacing:.1em}
+.nav-links a:hover{color:var(--gd)}
+.nav-links button{background:transparent;border:1px solid var(--br);color:var(--mt);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;cursor:pointer;font-family:Georgia,serif}
+.nav-links button:hover{border-color:var(--gd);color:var(--gd)}
+.wrap{max-width:1000px;margin:0 auto;padding:2rem 1.5rem 4rem}
 .tag{font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gd);margin-bottom:.6rem}
 h2{font-size:1.5rem;font-weight:600;margin-bottom:1.2rem}
 
 /* LOGIN */
 .login-box{max-width:420px;margin:4rem auto;background:var(--dp);border:1px solid var(--br);padding:2rem}
-.login-box h3{font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
-.login-box p{font-size:.85rem;color:var(--mt);margin-bottom:1.5rem}
-.fg{margin-bottom:1rem}
-.fg label{display:block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);margin-bottom:.4rem}
-.fg input{width:100%;padding:.8rem 1rem;background:var(--nv);border:1px solid var(--br);color:var(--wh);font-size:.88rem;font-family:Georgia,serif;outline:none;transition:border-color .2s;text-transform:uppercase;letter-spacing:.1em}
-.fg input:focus{border-color:var(--gd)}
-.fg input::placeholder{color:var(--mt);text-transform:none;letter-spacing:0}
-.btn{display:block;width:100%;padding:.9rem;background:linear-gradient(135deg,var(--gd),#a87a28);color:#0a0a0a;font-size:.82rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;font-family:Georgia,serif}
+.login-box .fg{margin-bottom:1.2rem}
+.login-box label{display:block;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);margin-bottom:.4rem}
+.login-box input{width:100%;padding:.9rem 1rem;background:var(--nv);border:1px solid var(--br);color:var(--wh);font-size:1.1rem;font-family:Georgia,serif;outline:none;text-align:center;letter-spacing:.2em;text-transform:uppercase}
+.login-box input:focus{border-color:var(--gd)}
+.btn{display:block;width:100%;padding:.9rem;background:linear-gradient(135deg,var(--gd),#a87a28);color:#0a0a0a;font-size:.82rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border:none;cursor:pointer;font-family:Georgia,serif;transition:opacity .2s}
 .btn:hover{opacity:.85}
-.err-login{display:none;background:#3d1515;color:#f08080;font-size:.82rem;padding:.6rem .8rem;margin-bottom:.8rem;border-left:3px solid var(--rd)}
+.err{display:none;background:#3d1515;color:#f08080;font-size:.85rem;padding:.8rem 1rem;margin-bottom:1rem;border-left:3px solid var(--rd)}
 
 /* DASHBOARD */
-.dashboard{display:none}
-.partner-header{background:var(--dp);border:1px solid var(--br);padding:1.5rem 2rem;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1rem}
-.partner-name{font-size:1.2rem;font-weight:700;color:var(--wh);margin-bottom:.3rem}
-.partner-code{font-size:.75rem;letter-spacing:.2em;color:var(--mt)}
-.level-badge{display:inline-block;padding:.4rem 1rem;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+#panel{display:none}
+.pcard{background:var(--dp);border:1px solid var(--br);padding:1.5rem 1.8rem;margin-bottom:1.2rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.pcard h3{font-size:1.3rem;font-weight:700;color:var(--wh)}
+.pcard .pcode{font-size:.8rem;color:var(--mt);margin-top:.2rem}
+.pcard .pcode strong{color:var(--gd);letter-spacing:.1em}
+.badge{padding:.4rem 1rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em}
 .badge-bronze{background:#1a0f00;color:var(--bronze);border:1px solid var(--bronze)}
 .badge-silver{background:#0f0f14;color:var(--silver);border:1px solid var(--silver)}
 .badge-gold{background:#1a1400;color:var(--gd);border:1px solid var(--gd)}
-
-/* METRICS */
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
-.mc{background:var(--dp);border:1px solid var(--br);padding:1.2rem;text-align:center}
-.mn{font-size:1.6rem;font-weight:900;color:var(--gd);display:block;margin-bottom:.2rem}
-.ml{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt)}
-
-/* PROGRESS BAR */
-.progress-box{background:var(--dp);border:1px solid var(--br);padding:1.2rem 1.5rem;margin-bottom:1.5rem}
-.progress-label{font-size:.75rem;color:var(--mt);margin-bottom:.6rem;display:flex;justify-content:space-between}
-.progress-track{background:var(--nv);height:8px;border-radius:4px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(to right,var(--bronze),var(--gd));border-radius:4px;transition:width .5s}
-.progress-levels{display:flex;justify-content:space-between;margin-top:.4rem;font-size:.65rem;color:var(--mt)}
-
-/* TABLE */
-.toolbar{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
-.toolbar input,.toolbar select{padding:.6rem 1rem;background:var(--nv);border:1px solid var(--br);color:var(--wh);font-size:.82rem;font-family:Georgia,serif;outline:none}
+.sgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.2rem}
+.sc{background:var(--dp);border:1px solid var(--br);padding:1.3rem;text-align:center}
+.sc .num{font-size:1.6rem;font-weight:900;color:var(--gd)}
+.sc .lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);margin-top:.3rem}
+.comm{background:var(--dp);border:1px solid var(--gd);padding:1.5rem;margin-bottom:1.2rem}
+.comm-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gd);margin-bottom:1rem}
+.comm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;text-align:center}
+.comm-grid .num{font-size:1.4rem;font-weight:900;color:var(--gd)}
+.comm-grid .lbl{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--mt);margin-top:.3rem}
+.toolbar{display:flex;gap:.8rem;margin-bottom:1rem;flex-wrap:wrap}
+.toolbar input,.toolbar select{padding:.6rem 1rem;background:var(--nv);border:1px solid var(--br);color:var(--wh);font-family:Georgia,serif;font-size:.85rem;outline:none}
 .toolbar input:focus,.toolbar select:focus{border-color:var(--gd)}
-.toolbar input::placeholder{color:var(--mt)}
-.toolbar select option{background:var(--nv)}
-.tw{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:600px}
+.toolbar button{padding:.6rem 1.2rem;background:transparent;border:1px solid var(--gd);color:var(--gd);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif}
+.toolbar button:hover{background:var(--gd);color:#0a0a0a}
+.tw{overflow-x:auto;background:var(--dp);border:1px solid var(--br)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
 th{background:var(--nv);color:var(--gd);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--br);white-space:nowrap}
 td{padding:.8rem 1rem;border-bottom:1px solid var(--br);color:#9BADC0;vertical-align:middle}
 tr:hover td{background:var(--nv)}
-.s-new{display:inline-block;padding:.2rem .6rem;font-size:.6rem;text-transform:uppercase;background:#1a2a3d;color:var(--bl);border:1px solid var(--bl)}
-.s-int{display:inline-block;padding:.2rem .6rem;font-size:.6rem;text-transform:uppercase;background:#2a2a0a;color:var(--yw);border:1px solid var(--yw)}
-.s-sold{display:inline-block;padding:.2rem .6rem;font-size:.6rem;text-transform:uppercase;background:#0a2a0a;color:var(--gn);border:1px solid var(--gn)}
-.s-cancel{display:inline-block;padding:.2rem .6rem;font-size:.6rem;text-transform:uppercase;background:#2a0a0a;color:var(--rd);border:1px solid var(--rd)}
-.empty{text-align:center;padding:3rem;color:var(--mt)}
-.logout-btn{background:transparent;border:1px solid var(--br);color:var(--mt);padding:.4rem .8rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif;transition:all .2s}
-.logout-btn:hover{border-color:var(--rd);color:var(--rd)}
-.refresh-btn{background:transparent;border:1px solid var(--br);color:var(--mt);padding:.5rem 1rem;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:Georgia,serif;transition:all .2s}
-.refresh-btn:hover{border-color:var(--gd);color:var(--gd)}
-.commission-box{background:var(--dp);border:1px solid var(--gd);padding:1.2rem 1.5rem;margin-bottom:1.5rem}
-.commission-title{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gd);margin-bottom:.8rem}
-.commission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.cg-item{text-align:center}
-.cg-val{font-size:1.3rem;font-weight:700;display:block;margin-bottom:.2rem}
-.cg-lbl{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mt)}
-@media(max-width:600px){.metrics{grid-template-columns:repeat(2,1fr)}.partner-header{grid-template-columns:1fr}.commission-grid{grid-template-columns:1fr}}
+.st{display:inline-block;padding:.15rem .6rem;font-size:.62rem;text-transform:uppercase;letter-spacing:.05em}
+.st-new{background:#0a2540;color:var(--bl);border:1px solid var(--bl)}
+.st-done{background:#0a2a0a;color:var(--gn);border:1px solid var(--gn)}
+.st-proc{background:#2a2000;color:var(--yw);border:1px solid var(--yw)}
+.empty{text-align:center;padding:2rem;color:var(--mt)}
+@media(max-width:700px){.sgrid{grid-template-columns:repeat(2,1fr)}.comm-grid{grid-template-columns:1fr;gap:1.5rem}}
 </style>
 </head>
 <body>
-
 <nav>
   <span class="logo">Пробуждение</span>
-  <div style="display:flex;gap:1rem;align-items:center">
-    <a href="index.html" style="font-size:.75rem;color:var(--mt);letter-spacing:.1em">← На сайт</a><a href="partners.html" style="font-size:.75rem;color:var(--gd);letter-spacing:.1em">Стать партнёром</a>
-    <button class="logout-btn" id="logout-btn" onclick="logout()" style="display:none">Выйти</button>
+  <div class="nav-links">
+    <a href="index.html">← На сайт</a>
+    <a href="partners.html">Стать партнёром</a>
+    <button id="logout-btn" onclick="logout()" style="display:none">Выйти</button>
   </div>
 </nav>
 
-<!-- LOGIN -->
-<div class="wrap" id="login-section">
+<!-- ÉCRAN DE CONNEXION -->
+<div id="login" class="wrap">
   <div class="login-box">
     <p class="tag">Кабинет партнёра</p>
-    <h3>Мои клиенты</h3>
-    <p>Введите ваш промокод чтобы войти и увидеть своих клиентов</p>
+    <h2>Мои клиенты</h2>
+    <p style="color:var(--mt);font-size:.88rem;margin-bottom:1.5rem">Введите ваш ключ доступа чтобы войти и увидеть своих клиентов</p>
+    <div class="err" id="login-err"></div>
     <div class="fg">
-      <label>Ваш промокод *</label>
-      <input type="text" id="login-code" placeholder="Например: ИИ1" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key==='Enter')doLogin()">
+      <label>🔑 Ваш ключ доступа *</label>
+      <input type="text" id="key-input" placeholder="Например: K7X9P2M4" maxlength="8" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')" onkeypress="if(event.key==='Enter')doLogin()">
     </div>
-    <div class="err-login" id="login-err">Промокод не найден. Проверьте правильность ввода.</div>
     <button class="btn" onclick="doLogin()">Войти в кабинет →</button>
-    <p style="font-size:.75rem;color:var(--mt);margin-top:1rem;text-align:center">Ещё не партнёр? <a href="partners.html" style="color:var(--gd)">Зарегистрироваться →</a></p>
+    <p style="text-align:center;margin-top:1.2rem;font-size:.82rem;color:var(--mt)">Ещё не партнёр? <a href="partners.html">Зарегистрироваться →</a></p>
   </div>
 </div>
 
-<!-- DASHBOARD -->
-<div class="wrap dashboard" id="dashboard-section">
-
-  <!-- PARTNER HEADER -->
-  <div class="partner-header">
+<!-- ESPACE PARTENAIRE -->
+<div id="panel" class="wrap">
+  <div class="pcard">
     <div>
-      <div class="partner-name" id="p-name">—</div>
-      <div class="partner-code">Промокод: <span id="p-code" style="color:var(--gd);font-weight:700"></span></div>
+      <h3 id="p-name"></h3>
+      <p class="pcode">Промокод: <strong id="p-code"></strong></p>
     </div>
-    <div id="p-level-badge"></div>
+    <span class="badge" id="p-badge"></span>
   </div>
 
-  <!-- METRICS -->
-  <div class="metrics">
-    <div class="mc"><span class="mn" id="m-total">0</span><span class="ml">Всего клиентов</span></div>
-    <div class="mc"><span class="mn" id="m-sold" style="color:var(--gn)">0</span><span class="ml">Продаж</span></div>
-    <div class="mc"><span class="mn" id="m-pending" style="color:var(--yw)">0</span><span class="ml">В процессе</span></div>
-    <div class="mc"><span class="mn" id="m-rate" style="color:var(--gd)">20%</span><span class="ml">Мой процент</span></div>
+  <div class="sgrid">
+    <div class="sc"><div class="num" id="s-total">0</div><div class="lbl">Всего клиентов</div></div>
+    <div class="sc"><div class="num" id="s-sales" style="color:var(--gn)">0</div><div class="lbl">Продаж</div></div>
+    <div class="sc"><div class="num" id="s-proc" style="color:var(--yw)">0</div><div class="lbl">В процессе</div></div>
+    <div class="sc"><div class="num" id="s-rate">20%</div><div class="lbl">Мой процент</div></div>
   </div>
 
-  <!-- COMMISSION -->
-  <div class="commission-box">
-    <p class="commission-title">💰 Мои комиссии</p>
-    <div class="commission-grid">
-      <div class="cg-item">
-        <span class="cg-val" id="c-earned" style="color:var(--gd)">0 ₽</span>
-        <span class="cg-lbl">Заработано</span>
-      </div>
-      <div class="cg-item">
-        <span class="cg-val" id="c-pending" style="color:var(--yw)">0 ₽</span>
-        <span class="cg-lbl">Ожидается</span>
-      </div>
-      <div class="cg-item">
-        <span class="cg-val" id="c-next" style="color:var(--mt)">—</span>
-        <span class="cg-lbl">След. уровень</span>
-      </div>
+  <div class="comm">
+    <p class="comm-title">💰 Мои комиссии</p>
+    <div class="comm-grid">
+      <div><div class="num" id="c-earned">0 ₽</div><div class="lbl">Заработано</div></div>
+      <div><div class="num" id="c-pending">0 ₽</div><div class="lbl">Ожидается</div></div>
+      <div><div class="num" id="c-next" style="font-size:1rem">—</div><div class="lbl">След. уровень</div></div>
     </div>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="progress-box">
-    <div class="progress-label">
-      <span id="prog-label">Прогресс к следующему уровню</span>
-      <span id="prog-count" style="color:var(--gd)"></span>
-    </div>
-    <div class="progress-track">
-      <div class="progress-fill" id="prog-fill" style="width:0%"></div>
-    </div>
-    <div class="progress-levels">
-      <span>🥉 Бронза (1-10)</span>
-      <span>🥈 Серебро (11-20)</span>
-      <span>🥇 Золото (21+)</span>
-    </div>
-  </div>
-
-  <!-- CLIENTS TABLE -->
   <p class="tag">Мои клиенты</p>
   <h2>Список клиентов</h2>
-
   <div class="toolbar">
-    <input type="text" id="search-cl" placeholder="Поиск по имени..." onkeyup="filterMyCl()">
-    <select id="filter-st" onchange="filterMyCl()">
+    <input type="text" id="search" placeholder="Поиск по имени..." oninput="renderClients()">
+    <select id="filter" onchange="renderClients()">
       <option value="">Все статусы</option>
       <option value="Новый">Новый</option>
-      <option value="Интересуется">Интересуется</option>
-      <option value="Продано">Продано</option>
-      <option value="Отказ">Отказ</option>
+      <option value="В процессе">В процессе</option>
+      <option value="Оплачен">Оплачен</option>
     </select>
-    <button class="refresh-btn" onclick="loadMyClients()">↻ Обновить</button>
+    <button onclick="loadClients()">↻ Обновить</button>
   </div>
-
   <div class="tw">
     <table>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Имя клиента</th>
-          <th>Телефон</th>
-          <th>Telegram</th>
-          <th>Сообщение</th>
-          <th>Статус</th>
-          <th>Моя комиссия</th>
-          <th>Дата</th>
-        </tr>
-      </thead>
-      <tbody id="my-clients-tbody">
-        <tr><td colspan="8" class="empty">Загрузка...</td></tr>
-      </tbody>
+      <thead><tr><th>#</th><th>Имя клиента</th><th>Телефон</th><th>Telegram</th><th>Сообщение</th><th>Статус</th><th>Моя комиссия</th><th>Дата</th></tr></thead>
+      <tbody id="tbl"><tr><td colspan="8" class="empty">Загрузка...</td></tr></tbody>
     </table>
   </div>
-
 </div>
 
 <script>
-var SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxwCXXq-Q949sRBkHKK4mmp2Iy2ler8C54HpCBnJ9tZScC1JSqA5kcFhOSVR-4Pr0Y/exec';
-var currentCode = '';
-var myClients = [];
-var myInfo = null;
+var FS = "https://firestore.googleapis.com/v1/projects/kurs-probuzhdenie-1/databases/(default)/documents/";
+var COURSE_PRICE = 70000; // prix du cours en ₽
+var currentPartner = null; // {name, code, accessKey}
+var allClients = [];
 
-function getRate(soldCount) {
-  if (soldCount <= 10) return {rate: 0.20, pct: '20%', level: 'Бронза', next: 10 - soldCount + ' продаж до Серебра (30%)'};
-  if (soldCount <= 20) return {rate: 0.30, pct: '30%', level: 'Серебро', next: 20 - soldCount + ' продаж до Золота (40%)'};
-  return {rate: 0.40, pct: '40%', level: 'Золото', next: '🥇 Максимальный уровень!'};
+// --- Utilitaires de lecture Firestore ---
+function fval(f){
+  if(!f) return '';
+  if(f.stringValue!==undefined) return f.stringValue;
+  if(f.integerValue!==undefined) return parseInt(f.integerValue);
+  if(f.booleanValue!==undefined) return f.booleanValue;
+  return '';
 }
 
-function getLevelBadge(sold) {
-  if (sold >= 21) return '<span class="level-badge badge-gold">🥇 Золото</span>';
-  if (sold >= 11) return '<span class="level-badge badge-silver">🥈 Серебро</span>';
-  return '<span class="level-badge badge-bronze">🥉 Бронза</span>';
+function getRate(sales){
+  if(sales<=10) return {rate:20, level:'Бронза', badge:'badge-bronze', icon:'🥉', next:(10-sales)+' продаж до Серебра (30%)'};
+  if(sales<=20) return {rate:30, level:'Серебро', badge:'badge-silver', icon:'🥈', next:(20-sales)+' продаж до Золота (40%)'};
+  return {rate:40, level:'Золото', badge:'badge-gold', icon:'🥇', next:'Максимальный уровень!'};
 }
 
-function getStatusBadge(status) {
-  var map = {'Новый':'s-new','Интересуется':'s-int','Продано':'s-sold','Отказ':'s-cancel'};
-  return '<span class="' + (map[status] || 's-new') + '">' + (status || 'Новый') + '</span>';
-}
-
-function getProgress(sold) {
-  if (sold <= 10) return (sold / 10) * 33;
-  if (sold <= 20) return 33 + ((sold - 10) / 10) * 33;
-  return Math.min(100, 66 + ((sold - 20) / 10) * 34);
-}
-
-function doLogin() {
-  var code = document.getElementById('login-code').value.trim().toUpperCase();
-  if (!code) {
-    document.getElementById('login-err').style.display = 'block';
+// --- CONNEXION PAR CLÉ ---
+function doLogin(){
+  var key = document.getElementById('key-input').value.trim().toUpperCase();
+  var err = document.getElementById('login-err');
+  if(key.length < 4){
+    err.textContent = 'Введите ваш ключ доступа.';
+    err.style.display = 'block';
     return;
   }
+  err.style.display = 'none';
 
-  // Fetch partners to verify code
-  fetch(SCRIPT_URL + '?type=partners')
+  // Chercher le partenaire dont accessKey correspond
+  fetch(FS + "partners")
     .then(function(r){ return r.json(); })
-    .then(function(data) {
-      var partner = (data.partners || []).find(function(p){ return p.code === code; });
-      if (!partner) {
-        // Try local storage for demo
-        document.getElementById('login-err').style.display = 'block';
-        return;
+    .then(function(data){
+      var found = null;
+      if(data.documents){
+        data.documents.forEach(function(doc){
+          var f = doc.fields || {};
+          if(fval(f.accessKey) && fval(f.accessKey).toUpperCase() === key){
+            found = {
+              name: fval(f.name),
+              code: fval(f.code),
+              accessKey: fval(f.accessKey)
+            };
+          }
+        });
       }
-      document.getElementById('login-err').style.display = 'none';
-      currentCode = code;
-      myInfo = partner;
-      sessionStorage.setItem('partnerCode', code);
-      sessionStorage.setItem('partnerName', partner.name);
-      showDashboard(partner.name, code);
-      loadMyClients();
-    })
-    .catch(function() {
-      // Demo mode — accept any code
-      var code2 = document.getElementById('login-code').value.trim().toUpperCase();
-      if (code2.length >= 2) {
-        currentCode = code2;
-        sessionStorage.setItem('partnerCode', code2);
-        sessionStorage.setItem('partnerName', 'Партнёр ' + code2);
-        showDashboard('Партнёр ' + code2, code2);
-        loadMyClients();
+      if(found){
+        currentPartner = found;
+        try{ sessionStorage.setItem('partnerKey', key); }catch(e){}
+        showPanel();
       } else {
-        document.getElementById('login-err').style.display = 'block';
+        err.textContent = 'Ключ доступа не найден. Проверьте правильность ввода.';
+        err.style.display = 'block';
       }
-    });
-}
-
-function showDashboard(name, code) {
-  document.getElementById('login-section').style.display = 'none';
-  document.getElementById('dashboard-section').style.display = 'block';
-  document.getElementById('logout-btn').style.display = 'block';
-  document.getElementById('p-name').textContent = name;
-  document.getElementById('p-code').textContent = code;
-}
-
-function loadMyClients() {
-  fetch(SCRIPT_URL + '?type=clients')
-    .then(function(r){ return r.json(); })
-    .then(function(data) {
-      myClients = (data.clients || []).filter(function(c){ return c.promoCode === currentCode; });
-      renderMyClients(myClients);
-      updateMetrics();
     })
-    .catch(function() {
-      myClients = [];
-      renderMyClients([]);
-      updateMetrics();
+    .catch(function(){
+      err.textContent = 'Ошибка соединения. Попробуйте ещё раз.';
+      err.style.display = 'block';
     });
 }
 
-function updateMetrics() {
-  var total = myClients.length;
-  var sold = myClients.filter(function(c){ return c.status === 'Продано'; }).length;
-  var pending = myClients.filter(function(c){ return c.status === 'Интересуется'; }).length;
-  var info = getRate(sold);
+function logout(){
+  currentPartner = null;
+  try{ sessionStorage.removeItem('partnerKey'); }catch(e){}
+  document.getElementById('panel').style.display = 'none';
+  document.getElementById('login').style.display = 'block';
+  document.getElementById('logout-btn').style.display = 'none';
+  document.getElementById('key-input').value = '';
+}
 
-  document.getElementById('m-total').textContent = total;
-  document.getElementById('m-sold').textContent = sold;
-  document.getElementById('m-pending').textContent = pending;
-  document.getElementById('m-rate').textContent = info.pct;
-  document.getElementById('p-level-badge').innerHTML = getLevelBadge(sold);
+function showPanel(){
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('panel').style.display = 'block';
+  document.getElementById('logout-btn').style.display = 'inline-block';
+  document.getElementById('p-name').textContent = currentPartner.name;
+  document.getElementById('p-code').textContent = currentPartner.code;
+  loadClients();
+}
 
-  // Commission earned
+// --- CHARGER LES CLIENTS DU PARTENAIRE ---
+function loadClients(){
+  document.getElementById('tbl').innerHTML = '<tr><td colspan="8" class="empty">Загрузка...</td></tr>';
+  fetch(FS + "clients")
+    .then(function(r){ return r.json(); })
+    .then(function(data){
+      allClients = [];
+      if(data.documents){
+        data.documents.forEach(function(doc){
+          var f = doc.fields || {};
+          var promo = (fval(f.promoCode) || '').toUpperCase();
+          // NE GARDER QUE les clients de CE partenaire (même promocode)
+          if(promo && promo === (currentPartner.code || '').toUpperCase()){
+            allClients.push({
+              name: fval(f.name),
+              phone: fval(f.phone),
+              telegram: fval(f.telegram),
+              message: fval(f.message),
+              status: fval(f.status) || 'Новый',
+              amount: fval(f.amount) || 0,
+              date: fval(f.date)
+            });
+          }
+        });
+      }
+      updateStats();
+      renderClients();
+    })
+    .catch(function(){
+      document.getElementById('tbl').innerHTML = '<tr><td colspan="8" class="empty">Ошибка загрузки. Нажмите «Обновить».</td></tr>';
+    });
+}
+
+function updateStats(){
+  var total = allClients.length;
+  var sales = allClients.filter(function(c){ return c.status === 'Оплачен'; }).length;
+  var proc = allClients.filter(function(c){ return c.status === 'В процессе'; }).length;
+  var info = getRate(sales);
+
+  document.getElementById('s-total').textContent = total;
+  document.getElementById('s-sales').textContent = sales;
+  document.getElementById('s-proc').textContent = proc;
+  document.getElementById('s-rate').textContent = info.rate + '%';
+
+  // commissions
   var earned = 0;
-  for (var i = 1; i <= sold; i++) {
-    earned += 70000 * getRate(i).rate;
-  }
-  // Commission pending (interested clients)
-  var pendingComm = pending * 70000 * info.rate;
+  for(var i=1;i<=sales;i++){ earned += COURSE_PRICE * (i<=10?0.2:i<=20?0.3:0.4); }
+  var pending = proc * COURSE_PRICE * (info.rate/100);
 
   document.getElementById('c-earned').textContent = earned.toLocaleString('ru-RU') + ' ₽';
-  document.getElementById('c-pending').textContent = pendingComm.toLocaleString('ru-RU') + ' ₽';
+  document.getElementById('c-pending').textContent = pending.toLocaleString('ru-RU') + ' ₽';
   document.getElementById('c-next').textContent = info.next;
-  document.getElementById('m-rate').textContent = info.pct;
 
-  // Progress bar
-  document.getElementById('prog-fill').style.width = getProgress(sold) + '%';
-  document.getElementById('prog-count').textContent = sold + ' продаж';
-  document.getElementById('prog-label').textContent = 'Прогресс — уровень ' + info.level;
+  var badge = document.getElementById('p-badge');
+  badge.className = 'badge ' + info.badge;
+  badge.textContent = info.icon + ' ' + info.level;
 }
 
-function renderMyClients(clients) {
-  var tbody = document.getElementById('my-clients-tbody');
-  if (!clients.length) {
-    tbody.innerHTML = '<tr><td colspan="8" class="empty">У вас пока нет клиентов.<br><span style="font-size:.82rem">Поделитесь своей реферальной ссылкой чтобы начать!</span></td></tr>';
+function renderClients(){
+  var q = document.getElementById('search').value.trim().toLowerCase();
+  var fs = document.getElementById('filter').value;
+  var rate = getRate(allClients.filter(function(c){return c.status==='Оплачен';}).length).rate;
+
+  var list = allClients.filter(function(c){
+    var okName = !q || (c.name && c.name.toLowerCase().indexOf(q) !== -1);
+    var okStatus = !fs || c.status === fs;
+    return okName && okStatus;
+  });
+
+  if(!list.length){
+    document.getElementById('tbl').innerHTML = '<tr><td colspan="8" class="empty">Клиентов пока нет</td></tr>';
     return;
   }
-  var soldCount = 0;
-  tbody.innerHTML = clients.map(function(c, i) {
-    if (c.status === 'Продано') soldCount++;
-    var rate = getRate(soldCount).rate;
-    var myComm = c.status === 'Продано' ? (70000 * rate).toLocaleString('ru-RU') + ' ₽' : '—';
+
+  document.getElementById('tbl').innerHTML = list.map(function(c,i){
+    var stClass = c.status==='Оплачен'?'st-done':c.status==='В процессе'?'st-proc':'st-new';
+    var comm = c.status==='Оплачен' ? (COURSE_PRICE*(rate/100)).toLocaleString('ru-RU')+' ₽' : '—';
+    var msg = c.message ? (c.message.length>30 ? c.message.substring(0,30)+'...' : c.message) : '—';
     return '<tr>'
-      + '<td style="color:var(--mt)">' + (i+1) + '</td>'
-      + '<td><strong style="color:var(--wh)">' + (c.name || '—') + '</strong></td>'
-      + '<td>' + (c.phone ? '<a href="tel:' + c.phone + '" style="color:var(--gd);text-decoration:none">' + c.phone + '</a>' : '—') + '</td>'
-      + '<td>' + (c.telegram ? '<a href="https://t.me/' + c.telegram.replace('@','') + '" target="_blank" style="color:var(--gd);text-decoration:none">' + c.telegram + '</a>' : '—') + '</td>'
-      + '<td style="font-size:.75rem;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + (c.message||'') + '">' + (c.message || '—') + '</td>'
-      + '<td>' + getStatusBadge(c.status) + '</td>'
-      + '<td style="color:' + (c.status==='Продано' ? 'var(--gd)' : 'var(--mt)') + ';font-weight:' + (c.status==='Продано'?'700':'400') + '">' + myComm + '</td>'
-      + '<td style="color:var(--mt);font-size:.75rem">' + (c.date || '—') + '</td>'
-      + '</tr>';
+      +'<td style="color:var(--mt)">'+(i+1)+'</td>'
+      +'<td><strong style="color:var(--wh)">'+(c.name||'—')+'</strong></td>'
+      +'<td>'+(c.phone||'—')+'</td>'
+      +'<td>'+(c.telegram||'—')+'</td>'
+      +'<td>'+msg+'</td>'
+      +'<td><span class="st '+stClass+'">'+c.status+'</span></td>'
+      +'<td style="color:var(--gd)">'+comm+'</td>'
+      +'<td style="color:var(--mt);font-size:.75rem">'+(c.date||'—')+'</td>'
+      +'</tr>';
   }).join('');
 }
 
-function filterMyCl() {
-  var s = document.getElementById('search-cl').value.toLowerCase();
-  var st = document.getElementById('filter-st').value;
-  var filtered = myClients.filter(function(c) {
-    var ms = !s || (c.name&&c.name.toLowerCase().includes(s)) || (c.phone&&c.phone.includes(s));
-    var mst = !st || c.status === st;
-    return ms && mst;
-  });
-  renderMyClients(filtered);
-}
-
-function logout() {
-  sessionStorage.clear();
-  currentCode = '';
-  myClients = [];
-  myInfo = null;
-  document.getElementById('login-section').style.display = 'block';
-  document.getElementById('dashboard-section').style.display = 'none';
-  document.getElementById('logout-btn').style.display = 'none';
-  document.getElementById('login-code').value = '';
-}
-
-// Auto-login if session exists
-window.onload = function() {
-  var saved = sessionStorage.getItem('partnerCode');
-  var savedName = sessionStorage.getItem('partnerName');
-  if (saved && savedName) {
-    currentCode = saved;
-    showDashboard(savedName, saved);
-    loadMyClients();
+// --- Reconnexion automatique si clé en session ---
+(function(){
+  var saved = null;
+  try{ saved = sessionStorage.getItem('partnerKey'); }catch(e){}
+  if(saved){
+    document.getElementById('key-input').value = saved;
+    doLogin();
   }
-};
-
-// Auto-refresh every 2 minutes
-setInterval(function() {
-  if (currentCode) loadMyClients();
-}, 120000);
+})();
 </script>
 </body>
 </html>
